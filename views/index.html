@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Metric/Imp Converter</title>
+    <meta name="description" content="Metric/Imp Converter- aproject by theTradeCoder">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./public/style.css">
+  </head>
+  <body>
+    <section class = "container">
+    
+    
+    <div id="testui">   
+      <header>
+      <h1 class="text-center">
+        Metric/Imp Converter
+      </h1>
+    </header>
+      
+      <form id="convertForm" class="d-flex flex-wrap justify-content-center">
+        <label id="inputLabel" for="convertField" class="label label-warning">Insert number & unit: </label>
+        <input type="text" id="convertField" name="input" class="bg-white padding flex-grow-1" placeholder="example: 10km" style="width: 200px">
+        <button id="convert" type="submit" class="btn btn-info flex-grow-1">Convert</button>
+      </form>
+      <p id="sampleInput" class="text-center p-1 m-3">Available Convert units: 
+        <code>mi, km, L, gal, lbs, kg </code>. Example input: 
+        <code>10mi, 10mile, 20km, 20kilometer, 5gal, 5gallon etc.</code></p>
+      
+      
+      <div id="resultDiv" class="border border-info">
+        <h2 class="text-center bg-white text-muted">Result Board</h2>
+      <p id="result" class="font-weight-bold text-primary"></p><hr/>
+       <code id="jsonResult"></code> <hr/>
+        <h3 id="visitApi" >API: </h3>
+        
+      </div>
+    </div>
+      <div id="author" class="d-none d-lg-flex flex-column justify-content-center align-items-center text-muted">
+        <img id="avatar" src="https://avatars3.githubusercontent.com/u/21096193?v=4" alt="author" width="50" height="50"/>
+        <span class="align-items-center">Mamun Abdullah<br/>
+          @thetradecoder</span>
+      </div>
+      
+    <div id="userstories" class="bg-white padding border border-info mt-3">
+    
+      <h3>Example usage:</h3>
+      <code>/api/convert?input=4gal</code><br>
+      <code>/api/convert?input=1/2km</code><br>
+      <code>/api/convert?input=5.4/3lbs</code><br>
+      <code>/api/convert?input=kg</code><br>
+      <h3>Example return:</h3>
+      <code>{initNum: 3.1, initUnit: 'mi', returnNum: 5.0000008, returnUnit: 'km', string: '3.1 miles converts to 5.00002 kilometers'}</code>
+    </div>
+   
+      <footer>
+      </footer>
+    
+    </section>
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script>
+    
+      
+      $(function() {
+        $('#convertForm').submit(function(event) {
+          event.preventDefault();
+          let input = $("#convertField").val();
+          
+          
+          $.ajax({
+            url: '/api/convert',
+            type: 'get',
+            data: $('#convertForm').serialize(),
+            success: function(data) {
+              $('#result').text(data.string || data.error || data);
+              $('#jsonResult').text(JSON.stringify(data.error?{error: data.error}:{
+                initNum:data.initNum,
+                initUnit:data.initUnit,
+                returnNum:data.returnNum,
+                returnUnit:data.returnUnit,
+                string:data.string
+              }));
+              $("#visitApi").html('API: <a id="apiLink" target="_self" href="/api/convert?input='+input+ '"'+ '>Click Here for API Link</a>');
+              
+              
+            }
+          });
+        });
+      });
+   </script>
+  </body>
+</html>

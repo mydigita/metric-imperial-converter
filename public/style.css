@@ -1,0 +1,89 @@
+:root {  
+  box-sizing:border-box;
+}
+*{
+  color:#333333;
+}
+html {
+  scroll-behavior: smooth;
+ }
+
+
+header{
+  padding-top:2rem;
+  padding-bottom:2rem;
+}
+
+#convertField{
+  min-width:60%;
+  min-height:10vh;
+  border:1px solid silver;
+  padding:10px;
+  border-radius:1px;
+}
+#convert{
+  min-width:40%;
+  min-height:10vh;
+  border-radius:1px;
+    
+}
+form#convertForm{
+  margin:auto;
+  width:70%;
+  justify-content:center;
+  background-color:orange;
+  padding:2px;
+  border-radius:5px;
+}
+
+
+
+#resultDiv{
+  padding:.75rem;
+  border-radius:20px;
+  margin-bottom:2rem;
+}
+
+
+#resultDiv, 
+#result,
+#jsonResult,
+#apiLink,
+#visitApi{
+  background-color:white;
+}
+#visitApi{
+  margin-top:2rem;  
+}
+
+#author{
+  position:fixed;
+  bottom:0;
+  right:10px ;
+  background-color:transparent;
+
+}
+#avatar{
+  border-radius:50%;
+}
+#userstories{
+  padding:20px;
+  border-radius:20px;
+}
+
+code{
+  color: #b11030;
+}
+footer{
+  padding-bottom:3rem;
+}
+#inputLabel{
+  margin:auto;
+  padding:.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  form#convertForm {
+    width: 100%;
+  }
+}
