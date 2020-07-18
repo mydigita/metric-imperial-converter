@@ -1,0 +1,3 @@
+UserAgent: '*',
+CrawlDelay: '5', 
+Sitemap:'https://fcc-metric-imperial-converter-thetradecoder.glitch.me/sitemap.xml'
